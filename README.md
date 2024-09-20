@@ -1,5 +1,3 @@
-<img src="src/images/banner.png" alt="ResumeAI Banner" height="200px">
-
 # ResumeAI: Resume Parser and Reviewer
 
 ResumeAI is an advanced tool that leverages the power of Large Language Models (LLMs) to analyze and improve resumes. This Streamlit-based application allows users to upload their resumes, optionally provide a job description, and receive detailed analysis and improvement suggestions.
@@ -14,44 +12,79 @@ ResumeAI is an advanced tool that leverages the power of Large Language Models (
 
 ## Installation
 
-1. Clone the repository:
+### Prerequisites
 
-2. Install the required dependencies:
+Ensure you have the following installed on your machine:
+- Python 3.7 or higher
+- Git
+
+### Steps
+
+1. Clone the repository:
+   ```sh
+   git clone <repository_url>
+   cd <repository_directory>
    ```
+
+2. Create a virtual environment and activate it:
+   ```sh
+   python -m venv venv
+   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+   ```
+
+3. Install the required dependencies:
+   ```sh
    pip install -r requirements.txt
    ```
 
 ## Usage
 
-1. Run the Streamlit app:
-   ```
+1. Set environment variables:
+   ```sh
    export OPENAI_API_KEY=<your_openai_api_key>
    export PYTHONPATH=$PYTHONPATH:$(pwd)
+   ```
+
+2. Run the Streamlit app:
+   ```sh
    streamlit run src/app.py --server.enableXsrfProtection false
    ```
 
-2. Open your web browser and navigate to the provided local URL (usually `http://localhost:8501`).
+3. Open your web browser and navigate to the provided local URL (usually [http://localhost:8501](http://localhost:8501)).
 
-3. Upload your resume PDF file using the file uploader in the sidebar.
+4. Upload your resume PDF file using the file uploader in the sidebar.
 
-4. (Optional) Enter a job description in the text area provided.
+5. (Optional) Enter a job description in the text area provided.
 
-5. Click the "Run Analysis" button to start the resume parsing and review process.
+6. Click the "Run Analysis" button to start the resume parsing and review process.
 
-6. Navigate through different sections of your resume using the arrow buttons.
+7. Navigate through different sections of your resume using the arrow buttons.
 
-7. Review the original content, revised content, and improvement suggestions for each section.
+8. Review the original content, revised content, and improvement suggestions for each section.
 
 ## Project Structure
 
-- `app.py`: Main Streamlit application file.
-- `src/utils/pdf.py`: Contains functions for extracting text from PDF files.
-- `src/utils/llm.py`: Includes functions for parsing resumes and reviewing them using LLMs.
-- `resume_formatter.py`: Handles the formatting of resume content for display.
-- `src/images/banner.png`: Banner image for the application.
+```
+.
+├── src/
+│   ├── app.py                 # Main Streamlit application file
+│   ├── utils/
+│   │   ├── pdf.py             # Functions for extracting text from PDF files
+│   │   └── llm.py             # Functions for parsing resumes and reviewing them using LLMs
+│   ├── resume_formatter.py    # Handles the formatting of resume content for display
+│   └── images/
+│       └── banner.png         # Banner image for the application
+├── requirements.txt           # List of required dependencies
+│
+└── README.md                  # Project documentation (this file)
+```
 
 ## Dependencies
 
 - Streamlit
 - PyYAML
-- (Other dependencies as listed in `requirements.txt`)
+- (Other dependencies listed in `requirements.txt`)
+
+---
+
+This revision should help new users get up and running quickly and understand the project structure better.
