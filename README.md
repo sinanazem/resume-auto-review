@@ -1,4 +1,5 @@
 # ResumeAI: Resume Parser and Reviewer
+<img src="https://github.com/sinanazem/resume-auto-review/blob/main/src/images/banner.png">
 
 ResumeAI is an advanced tool that leverages the power of Large Language Models (LLMs) to analyze and improve resumes. This Streamlit-based application allows users to upload their resumes, optionally provide a job description, and receive detailed analysis and improvement suggestions.
 
