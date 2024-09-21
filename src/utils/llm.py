@@ -10,7 +10,11 @@ from openai import OpenAI
 import os
 import streamlit as st
 
-client = OpenAI(api_key="sk-proj-1wsGi8bDZLPAbVdfsXcET3BlbkFJ1i39TxBpDKgbZuYgeja9")
+from dotenv import load_dotenv
+
+load_dotenv()
+
+client = OpenAI()
 
 
 @st.cache_resource

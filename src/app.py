@@ -3,15 +3,76 @@ import yaml
 from src.utils.pdf import extract_text_from_pdf
 from src.utils.llm import parse_resume, review_resume
 from resume_formatter import format_resume
+import streamlit as st
+from langchain_core.messages import AIMessage, HumanMessage
+from langchain_openai import ChatOpenAI
+from dotenv import load_dotenv
+from langchain_core.output_parsers import StrOutputParser
+from langchain_core.prompts import ChatPromptTemplate
+import os
+
+from dotenv import load_dotenv
+
+load_dotenv()
 
 def main():
-    st.title(":page_facing_up: Resume Parser and Reviewer")
-    st.sidebar.image("src/images/banner.png")
-    st.sidebar.markdown("""
-        :brain: ResumeAI is an advanced tool that leverages the power of Large Language Models (LLMs) to analyze and improve resumes.
-    """)
-
+        
     with st.sidebar:
+        def get_response(user_query, chat_history):
+
+            template = """
+            You are a helpful assistant. Answer the following questions considering the history of the conversation:
+
+            Chat history: {chat_history}
+
+            User question: {user_question}
+            """
+
+            prompt = ChatPromptTemplate.from_template(template)
+
+            llm = ChatOpenAI()
+                
+            chain = prompt | llm | StrOutputParser()
+            
+            return chain.invoke({
+                "chat_history": chat_history,
+                "user_question": user_query,
+            })
+
+        # session state
+        if "chat_history" not in st.session_state:
+            st.session_state.chat_history = [
+                AIMessage(content="Hello, I am a bot. How can I help you?"),
+            ]
+
+        history = st.container(height=730)
+        user_query = st.chat_input("Type your message here...")
+        # conversation
+        for message in st.session_state.chat_history:
+            if isinstance(message, AIMessage):
+                with history.chat_message("AI"):
+                    st.write(message.content)
+            elif isinstance(message, HumanMessage):
+                with history.chat_message("Human"):
+                    st.write(message.content)
+
+        
+        if user_query is not None and user_query != "":
+            st.session_state.chat_history.append(HumanMessage(content=user_query))
+
+            with history.chat_message("Human"):
+                st.markdown(user_query)
+
+            with history.chat_message("AI"):
+                response = get_response(user_query, st.session_state.chat_history)
+                st.write(response)
+
+            st.session_state.chat_history.append(AIMessage(content=response))
+        
+    st.image("src/images/banner.png")
+    st.markdown("### 🗂️ Resume Parser and Reviewer")
+
+    with st.expander("Upload your resume"):
         uploaded_file = st.file_uploader("Upload your resume (PDF)", type="pdf")
         job_description = st.text_area("Enter job description (optional)").strip()
 
