@@ -1,4 +1,6 @@
 streamlit==1.38.0
-openai==1.13.4
 PyPDF2==3.0.1
 PyYAML==6.0.2
+python-dotenv==1.0.1
+langchain-core==0.3.0
+langchain-openai==0.2.0

@@ -1,0 +1,9 @@
+version: "3.8"
+
+services:
+  streamlit:
+    build: .
+    command: streamlit run src/app.py  # The Streamlit UI application
+    ports:
+      - "8501:8501"
+    restart: always

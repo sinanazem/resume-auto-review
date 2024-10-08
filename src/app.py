@@ -91,6 +91,9 @@ def main():
                 st.session_state.review_data = review_data
                 st.session_state.current_section = 0
                 st.session_state.sections = list(resume_data.keys())
+                
+            else:
+                st.warning("No file uploaded")
 
     if 'resume_data' in st.session_state and 'review_data' in st.session_state:
         display_analysis()

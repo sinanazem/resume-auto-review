@@ -6,7 +6,7 @@ def format_date(date_obj):
     return str(date_obj) if date_obj else ""
 
 def format_personal_info(info):
-    if not info:
+    if not info or not isinstance(info, dict):
         return ""
 
     markdown = f"### {info.get('full_name', 'Name Not Provided')}\n\n"
@@ -37,7 +37,7 @@ def format_summary(summary):
     return f"#### Summary\n\n{summary}\n\n" if summary else ""
 
 def format_work_experience(experience):
-    if not experience:
+    if not experience or not isinstance(experience, list):
         return ""
 
     markdown = "#### Work Experience\n\n"
@@ -57,7 +57,7 @@ def format_work_experience(experience):
     return markdown
 
 def format_education(education):
-    if not education:
+    if not education or not isinstance(education, list):
         return ""
 
     markdown = "#### Education\n\n"
@@ -75,10 +75,14 @@ def format_education(education):
     return markdown
 
 def format_skills(skills):
+    if not skills or not isinstance(skills, list):
+        return ""
+
+    skills = [skill for skill in skills if skill]  # Ensure no None values
     return f"#### Skills\n\n{', '.join(skills)}\n\n" if skills else ""
 
 def format_certifications(certifications):
-    if not certifications:
+    if not certifications or not isinstance(certifications, list):
         return ""
 
     markdown = "#### Certifications\n\n"
@@ -90,7 +94,7 @@ def format_certifications(certifications):
     return markdown + "\n"
 
 def format_projects(projects):
-    if not projects:
+    if not projects or not isinstance(projects, list):
         return ""
 
     markdown = "#### Projects\n\n"
@@ -99,6 +103,7 @@ def format_projects(projects):
         if project.get('description'):
             markdown += f"{project['description']}\n\n"
         if project.get('technologies'):
+            project['technologies'] = [tech for tech in project['technologies'] if tech]  # Ensure no None values
             markdown += f"**Technologies used:** {', '.join(project['technologies'])}\n"
         if project.get('url'):
             markdown += f"**URL:** [{project['url']}]({project['url']})\n"
@@ -106,7 +111,7 @@ def format_projects(projects):
     return markdown
 
 def format_languages(languages):
-    if not languages:
+    if not languages or not isinstance(languages, list):
         return ""
 
     markdown = "#### Languages\n\n"
@@ -115,7 +120,7 @@ def format_languages(languages):
     return markdown + "\n"
 
 def format_volunteer_experience(experience):
-    if not experience:
+    if not experience or not isinstance(experience, list):
         return ""
 
     markdown = "#### Volunteer Experience\n\n"
@@ -130,12 +135,19 @@ def format_volunteer_experience(experience):
     return markdown
 
 def format_interests(interests):
+    if not interests or not isinstance(interests, list):
+        return ""
+
+    interests = [interest for interest in interests if interest]  # Ensure no None values
     return f"#### Interests\n\n{', '.join(interests)}\n\n" if interests else ""
 
 def format_references(references):
     return "#### References\n\nAvailable upon request\n" if references else ""
 
 def format_resume(data):
+    if not isinstance(data, dict):
+        return "Invalid data format."
+
     sections = [
         format_personal_info(data.get('personal_info')),
         format_summary(data.get('summary')),
