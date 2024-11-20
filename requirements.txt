@@ -4,3 +4,10 @@ PyYAML==6.0.2
 python-dotenv==1.0.1
 langchain-core==0.3.0
 langchain-openai==0.2.0
+openai==0.28.0
+psycopg2-binary==2.9.10
+pgvector==0.3.6
+loguru==0.7.2
+python-jobspy==1.1.75
+python-dotenv==1.0.1
+pymupdf4llm==0.0.17
