@@ -79,7 +79,8 @@ Ensure you have the following installed on your machine:
 │
 └── README.md                  # Project documentation (this file)
 ```
-
+<img src="https://github.com/sinanazem/resume-auto-review/blob/main/src/images/ResumeAI_architecture.png?raw=true">
+<br><br>
 ## Dependencies
 
 - Streamlit
