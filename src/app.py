@@ -146,7 +146,8 @@ def main():
             st.info("Please upload a resume and run the analysis to view results.")
     
     with tab2:
-        job_recommendation(uploaded_file)
+        #job_recommendation(uploaded_file)
+        pass
 
 
 if __name__ == "__main__":

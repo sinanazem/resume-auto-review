@@ -1,19 +1,11 @@
 import streamlit as st
-from PyPDF2 import PdfReader
 import psycopg2
-import pandas as pd
+import base64
 
+from PyPDF2 import PdfReader
+from src.utils.helpers import get_top3_similar_docs
 from dotenv import load_dotenv
 load_dotenv()
-
-from src.utils.helpers import get_top3_similar_docs
-
-                
-import streamlit as st
-import os
-
-import base64
-from PIL import Image
 
 def extract_text_from_pdf(pdf_file):
     reader = PdfReader(pdf_file)
@@ -117,12 +109,7 @@ def display_profile_card(job):
 
 def job_recommendation(uploaded_file):
     st.header("Job Recommendation")
-
-    # with st.expander("Upload your resume"):
-    #         uploaded_file = st.file_uploader("Upload your resume (PDF)", type="pdf")
-    #         job_description = st.text_area("Enter job description (optional)").strip()
-            
-    # if st.button("Jobs Recommendation", use_container_width=True):
+    
     if uploaded_file is not None:
         resume_text = extract_text_from_pdf(uploaded_file)
         top3_similar_docs = get_top3_similar_docs(resume_text, connection)
