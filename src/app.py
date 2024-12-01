@@ -88,6 +88,11 @@ def main():
                         resume_yaml = parse_resume(resume_text)
                     with st.spinner("Reviewing resume... [Step 2 of 2]"):
                         review_response = review_resume(resume_yaml, job_description)
+                        
+                        st.markdown("# Resume YAML")
+                        st.write(resume_yaml)
+                        st.markdown("# Review Response")
+                        st.write(review_response)
 
                     resume_data = yaml.safe_load(resume_yaml)
                     review_data = yaml.safe_load(review_response)
